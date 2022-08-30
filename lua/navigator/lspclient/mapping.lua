@@ -116,8 +116,8 @@ local key_maps_help = {}
 local M = {}
 
 local ccls_mappings = {
-  { key = '<Leader>gi', func = require('navigator.cclshierarchy').incoming_calls, desc = 'incoming_calls' },
-  { key = '<Leader>go', func = require('navigator.cclshierarchy').outgoing_calls, desc = 'outgoing_calls' },
+  { key = '<Leader>ci', func = require('navigator.cclshierarchy').incoming_calls, desc = 'incoming_calls' },
+  { key = '<Leader>co', func = require('navigator.cclshierarchy').outgoing_calls, desc = 'outgoing_calls' },
 }
 
 local check_cap = function(opts)
