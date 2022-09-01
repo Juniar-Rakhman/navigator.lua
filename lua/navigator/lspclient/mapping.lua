@@ -28,7 +28,7 @@ local key_maps = {
   -- { key = "<c-]>", func = require("navigator.definition").definition, desc = "definition" },
   { key = 'gd', func = require('navigator.definition').definition, desc = 'go to definition' },
   { key = 'gD', func = vim.lsp.buf.declaration, desc = 'declaration' },
-  { key = 'gp', func = require('navigator.definition').definition_preview, desc = 'definition_preview' },
+  { key = 'gp', func = require('navigator.definition').definition_preview, desc = 'preview definition' },
   { key = 'gi', func = vim.lsp.buf.implementation, desc = 'go to implementation' },
   -- { key = "<Leader>gt", func = require("navigator.treesitter").buf_ts, desc = "buf_ts" },
   -- { key = "<Leader>gT", func = require("navigator.treesitter").bufs_ts, desc = "bufs_ts" },
@@ -56,11 +56,11 @@ local key_maps = {
     func = require('navigator.diagnostics').show_buf_diagnostics,
     desc = 'show buffer diagnostic',
   },
-  -- {
-  --   key = "<Leader>dt",
-  --   func = require("navigator.diagnostics").toggle_diagnostics,
-  --   desc = "toggle_diagnostics",
-  -- },
+  {
+    key = "<Leader>ct",
+    func = require("navigator.diagnostics").toggle_diagnostics,
+    desc = "toggle_diagnostics",
+  },
   { key = ']d', func = vim.diagnostic.goto_next, desc = 'next diagnostics' },
   { key = '[d', func = vim.diagnostic.goto_prev, desc = 'prev diagnostics' },
   { key = ']O', func = vim.diagnostic.set_loclist, desc = 'diagnostics set loclist' },
@@ -76,7 +76,7 @@ local key_maps = {
   -- },
   -- {
   --   key = "<Space>wr",
-  --   func = require("navigator.workspace").remove_workspace_folder,
+  -- func = require("navigator.workspace").remove_workspace_folder,
   --   desc = "remove_workspace_folder",
   -- },
   { key = '<Leader>cf', func = vim.lsp.buf.format, mode = 'n', desc = 'format' },
@@ -376,8 +376,7 @@ function M.setup(attach_opts)
 
   -- TODO: when active signature merge to neovim, remove this setup:
 
-  if
-    _NgConfigValues.signature_help_cfg and #_NgConfigValues.signature_help_cfg > 0 or _NgConfigValues.lsp_signature_help
+  if _NgConfigValues.signature_help_cfg and #_NgConfigValues.signature_help_cfg > 0 or _NgConfigValues.lsp_signature_help
   then
     log('setup signature from navigator')
     local hassig, sig = pcall(require, 'lsp_signature')
